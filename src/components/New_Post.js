@@ -18,6 +18,13 @@ class NavBar extends Component {
   }
   addPost(e) {
     e.preventDefault();
+    this.props.addNewPost(this.state);
+    this.setState({
+      title: '',
+      body: '',
+      author: '',
+      imageUrl: ''
+    })
   }
   handleChange(e) {
     this.setState({
@@ -27,6 +34,7 @@ class NavBar extends Component {
   }
 
   render() {
+    const {title, body, author, imageUrl} = this.state;
     if (this.props.newPostActive == true) {
       return (
         <div className="row">
@@ -35,19 +43,19 @@ class NavBar extends Component {
             <form onSubmit={this.addPost}>
               <div>
                 <label htmlFor="title">Title</label>
-              <input onChange={this.handleChange} id="title" className="form-control" />
+              <input onChange={this.handleChange} value={title} id="title" className="form-control" />
               </div>
               <div>
                 <label htmlFor="body">Body</label>
-              <textarea onChange={this.handleChange} id="body" className="form-control"></textarea>
+              <textarea onChange={this.handleChange} value={body} id="body" className="form-control"></textarea>
               </div>
               <div>
                 <label htmlFor="author">Author</label>
-              <input onChange={this.handleChange} id="author" className="form-control" />
+              <input onChange={this.handleChange} value={author} id="author" className="form-control" />
               </div>
               <div>
                 <label htmlFor="image-url">Image URL</label>
-              <input onChange={this.handleChange} id="image-url" className="form-control" />
+              <input onChange={this.handleChange} value={imageUrl} id="imageUrl" className="form-control" />
               </div>
               <div className="form-group">
                 <button type="submit" className="btn btn-primary">

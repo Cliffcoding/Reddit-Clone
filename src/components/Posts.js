@@ -1,48 +1,46 @@
 import React, { Component } from 'react'
 
 import AddComment from './Add_Comment';
+import Rating from './Ratings'
 
 class Posts extends Component {
   constructor(props) {
     super(props);
-
-    
+    console.log(props);
   }
   render() {
     return (
       <div className="row">
-        <div className="col-md-12">
+      {this.props.posts.map((post, i) => {
+        return(
+          <div key={i} className="col-md-12">
+            <div className="well">
+              <div className="media-left">
+                <img src={post.imageUrl} className="media-object img-responsive" alt="Responsive"/>
+              </div>
+              <div className="media-body">
+                <h4 className="media-heading">
+                  {post.title}
+                  <Rating />
+                </h4>
+                <div className="text-right">
+                  {post.author}
+                </div>
+                <p>
+                  {post.body}
+                </p>
+                <div>
 
-          <div className="well">
-            <div className="media-left">
-              <img className="media-object" />
-            </div>
-            <div className="media-body">
-              <h4 className="media-heading">
-                Some Text
-                |
-                <a><i className="glyphicon glyphicon-arrow-up"></i></a>
-              <a><i className="glyphicon glyphicon-arrow-down"></i></a>
-                10
-              </h4>
-              <div className="text-right">
-                Some Author
+                  <i className="glyphicon glyphicon-comment"></i>
+                  <a>
+                    Some comments
+                  </a>
+                </div>
+                <AddComment />
               </div>
-              <p>
-                Some text
-              </p>
-              <div>
-                Some time ago
-                |
-                <i className="glyphicon glyphicon-comment"></i>
-                <a>
-                  Some comments
-                </a>
-              </div>
-              <AddComment />
             </div>
           </div>
-        </div>
+        )})}
       </div>
     );
   }

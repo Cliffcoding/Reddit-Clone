@@ -15,10 +15,23 @@ class Index extends Component {
   constructor(props) {
     super(props);
     this.toggleNewPost = this.toggleNewPost.bind(this);
+    this.addNewPost = this.addNewPost.bind(this);
 
     this.state = {
-      newPostActive: true,
+      newPostActive: false,
       posts: [{
+        title: 'First Post!',
+        body: 'I want to write something very descriptive, but I am just not sure',
+        author: 'J-Doggy',
+        imageUrl: 'https://static.pexels.com/photos/494917/pexels-photo-494917.jpeg'
+      },
+      {
+        title: 'First Post!',
+        body: 'I want to write something very descriptive, but I am just not sure',
+        author: 'J-Doggy',
+        imageUrl: 'https://static.pexels.com/photos/494917/pexels-photo-494917.jpeg'
+      },
+      {
         title: 'First Post!',
         body: 'I want to write something very descriptive, but I am just not sure',
         author: 'J-Doggy',
@@ -27,14 +40,16 @@ class Index extends Component {
     }
   }
   toggleNewPost() {
-    if (this.state.newPostActive == true) {
+    if (this.state.newPostActive === true) {
       this.setState({newPostActive: false})
-    } else if (this.state.newPostActive == false){
+    } else if (this.state.newPostActive === false){
       this.setState({newPostActive: true})
     }
   }
-  addNewPost() {
-
+  addNewPost(post) {
+    this.setState({
+      posts: this.state.posts.concat(post)
+    })
   }
   render() {
     const newPostActive = this.state.newPostActive;
@@ -42,9 +57,12 @@ class Index extends Component {
     return (
       <div>
         <NavBar />
-        <NewPostButton toggleNewPost={this.toggleNewPost}/>
+        <NewPostButton
+          toggleNewPost={this.toggleNewPost}/>
         <FilterPosts />
-        <NewPost newPostActive={newPostActive}/>
+        <NewPost
+          addNewPost={this.addNewPost}
+          newPostActive={newPostActive}/>
         <Posts posts={this.state.posts}/>
       </div>
     );
