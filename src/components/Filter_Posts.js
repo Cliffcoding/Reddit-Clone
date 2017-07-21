@@ -12,7 +12,7 @@ class FilterPosts extends Component {
             <input type="search" className="form-control input-sm search-form" placeholder="Filter" />
           </li>
           <div className="form-inline">
-            <label for="sort">  Sort by </label>
+            <label htmlFor="sort">  Sort by </label>
           <select className="form-control" id="sort">
               <option>Some text</option>
               <option>Some text</option>
