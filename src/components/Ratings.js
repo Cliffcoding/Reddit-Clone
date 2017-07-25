@@ -5,30 +5,25 @@ class Rating extends Component {
     super(props);
     this.upVote = this.upVote.bind(this);
     this.downVote = this.downVote.bind(this)
-    this.state = {
-      count: 0
-    }
   }
   upVote(){
-    this.setState((prevState) => {
-      console.log(prevState.count);
-      count: prevState.count++
-    })
+    let rating = this.props.rating +1;
+    this.props.receiveRatingFromChild(rating, this.props.postId)
   }
   downVote(){
-    if (this.state.count === 0) {
+    let rating = this.props.rating - 1;
+
+    if (this.props.rating === 0) {
       return
     }
-    this.setState((prevState) => {
-      count: prevState.count--
-    })
+    this.props.receiveRatingFromChild(rating, this.props.postId)
   }
   render(){
     return(
       <div>
         <a><i onClick={this.upVote} className="glyphicon glyphicon-arrow-up"></i></a>
       <a><i onClick={this.downVote} className="glyphicon glyphicon-arrow-down"></i></a>
-      {this.state.count}
+      {this.props.rating}
       </div>
     )
   }

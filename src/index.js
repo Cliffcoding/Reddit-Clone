@@ -7,7 +7,8 @@ import NavBar from './components/Nav_Bar';
 import FilterPosts from './components/Filter_Posts';
 import NewPostButton from './components/New_Post_Button'
 import NewPost from './components/New_Post';
-import Posts from './components/Posts';
+import Post from './components/Post';
+import SamplePosts from './sample-data'
 
 
 
@@ -16,54 +17,84 @@ class Index extends Component {
     super(props);
     this.toggleNewPost = this.toggleNewPost.bind(this);
     this.addNewPost = this.addNewPost.bind(this);
-
+    this.searchTermChange = this.searchTermChange.bind(this);
+    this.searchFilter =this.searchFilter.bind(this);
+    this.receiveRatingFromChild = this.receiveRatingFromChild.bind(this);
+    this.receiveCommentFromChild = this.receiveCommentFromChild.bind(this);
     this.state = {
+      term: '',
       newPostActive: false,
-      posts: [{
-        title: 'First Post!',
-        body: 'I want to write something very descriptive, but I am just not sure',
-        author: 'J-Doggy',
-        imageUrl: 'https://static.pexels.com/photos/494917/pexels-photo-494917.jpeg'
-      },
-      {
-        title: 'First Post!',
-        body: 'I want to write something very descriptive, but I am just not sure',
-        author: 'J-Doggy',
-        imageUrl: 'https://static.pexels.com/photos/494917/pexels-photo-494917.jpeg'
-      },
-      {
-        title: 'First Post!',
-        body: 'I want to write something very descriptive, but I am just not sure',
-        author: 'J-Doggy',
-        imageUrl: 'https://static.pexels.com/photos/494917/pexels-photo-494917.jpeg'
-      }]
+      posts: SamplePosts
     }
   }
   toggleNewPost() {
-    if (this.state.newPostActive === true) {
-      this.setState({newPostActive: false})
-    } else if (this.state.newPostActive === false){
-      this.setState({newPostActive: true})
-    }
+    this.state.newPostActive === true ? this.setState({newPostActive: false}) : this.setState({newPostActive: true})
   }
+
   addNewPost(post) {
     this.setState({
       posts: this.state.posts.concat(post)
     })
   }
+  receiveRatingFromChild(rating, index) {
+    this.setState({
+      posts: this.state.posts.map((post, i) => {
+        if (i === index) {
+         post.rating = rating
+        }
+          return post;
+      })
+    })
+  }
+  receiveCommentFromChild(comment, index) {
+    console.log(comment, index);
+    this.setState({
+      posts: this.state.posts.map((post, i) => {
+        if (i === index) {
+         post.comments = post.comments.concat(comment)
+        }
+          return post;
+      })
+    })
+  }
+  searchTermChange(term) {
+    this.setState({
+      term
+    })
+    console.log(this.state.term);
+  }
+  searchFilter(term){
+    return (x) => {
+      return x.title.toLowerCase().includes(term.toLowerCase())
+    }
+  }
   render() {
     const newPostActive = this.state.newPostActive;
-
     return (
       <div>
         <NavBar />
         <NewPostButton
           toggleNewPost={this.toggleNewPost}/>
-        <FilterPosts />
+        <FilterPosts
+          searchTermChange={this.searchTermChange}
+        />
         <NewPost
+          toggleNewPost={this.toggleNewPost}
           addNewPost={this.addNewPost}
           newPostActive={newPostActive}/>
-        <Posts posts={this.state.posts}/>
+        {this.state.posts.filter(this.searchFilter(this.state.term)).map((post, i) => {
+          return(
+            <Post
+              receiveCommentFromChild={this.receiveCommentFromChild}
+              receiveRatingFromChild={this.receiveRatingFromChild}
+              rating={post.rating}
+              key={i}
+              postId={i}
+              post={post}
+            />
+          )
+        })}
+
       </div>
     );
   }

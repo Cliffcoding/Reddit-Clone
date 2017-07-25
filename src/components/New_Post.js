@@ -13,11 +13,13 @@ class NavBar extends Component {
       title: '',
       body: '',
       author: '',
-      imageUrl: ''
+      imageUrl: '',
+      comments: []
     }
   }
   addPost(e) {
     e.preventDefault();
+    this.props.toggleNewPost();
     this.props.addNewPost(this.state);
     this.setState({
       title: '',
@@ -30,12 +32,11 @@ class NavBar extends Component {
     this.setState({
       [e.target.id]: e.target.value
     });
-    console.log(this.state);
   }
 
   render() {
     const {title, body, author, imageUrl} = this.state;
-    if (this.props.newPostActive == true) {
+    if (this.props.newPostActive === true) {
       return (
         <div className="row">
           <div className="col-md-8">
