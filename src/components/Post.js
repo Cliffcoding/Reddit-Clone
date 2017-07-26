@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import Moment from 'react-moment'
 import Rating from './Ratings';
 import Comments from './Comments';
 import AddComment from './Add_Comment';
@@ -7,17 +7,10 @@ import AddComment from './Add_Comment';
 class Post extends Component {
   constructor(props) {
     super(props);
-    this.addNewComment = this.addNewComment.bind(this);
     this.toggleComments = this.toggleComments.bind(this);
     this.state={
-      comments: this.props.post.comments,
       commentsShowing: false
     }
-  }
-  addNewComment(newComment) {
-    this.setState({
-        comments: this.state.comments.concat(newComment)
-    })
   }
   toggleComments() {
     this.state.commentsShowing === true ? this.setState({ commentsShowing: false }) : this.setState({ commentsShowing: true})
@@ -45,11 +38,15 @@ class Post extends Component {
                 <p>
                   {this.props.post.body}
                 </p>
-
                     <i className="glyphicon glyphicon-comment"></i>
                     <a onClick={ this.toggleComments }>
-                      Comments
+                      {this.props.post.comments.length} Comments   
                     </a>
+                    <small>
+                      <Moment fromNow>
+                        {this.props.post.created_at}
+                      </Moment>
+                    </small>
                   {this.state.commentsShowing === true &&
                   <div>
                     {this.props.post.comments.map((comment, i) => {
@@ -57,7 +54,6 @@ class Post extends Component {
                         <Comments
                           key={i}
                           commentId={i}
-                          comments={this.state.comments}
                           comment={comment}
                         />
                       )

@@ -6,18 +6,17 @@ class FilterPosts extends Component {
     this.onInputChange = this.onInputChange.bind(this);
     this.handleSort = this.handleSort.bind(this);
     this.state = {
-      term: '',
-      value: 'date'
+      term: ''
      };
   }
   onInputChange(term) {
-    this.setState({term})
     this.props.searchTermChange(term)
   }
   handleSort(e){
     this.setState({
-      value: e.target.value
+      sortValue: e.target.value
     })
+    this.props.sortFilter(e.target.value);
   }
   render() {
     return (
@@ -29,7 +28,7 @@ class FilterPosts extends Component {
 
           <div className="form-inline">
             <label htmlFor="sort">  Sort by </label>
-            <select value={this.state.value} onChange={this.handleSort} className="form-control" id="sort">
+            <select value={this.state.sortValue} onChange={this.handleSort} className="form-control" id="sort">
               <option value="votes">Votes</option>
               <option value="date">Date</option>
               <option value="title">Title</option>

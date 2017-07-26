@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
+import Moment from 'react-moment';
 class Comments extends Component {
-  constructor(props) {
-    super(props);
-  }
   render() {
       return (
         <div>
@@ -11,12 +9,13 @@ class Comments extends Component {
             <div className="col-md-offset-1">
                 <div>
                   <hr />
-                  <p>
-                    {this.props.comment.date.toLocaleTimeString()}
-                  </p>
+
                   <p>
                     {this.props.comment.name}
                   </p>
+                  <small>
+                    <Moment interval={30000} fromNow>{this.props.comment.date}</Moment>
+                  </small>
                 </div>
 
             </div>

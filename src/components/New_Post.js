@@ -14,7 +14,9 @@ class NavBar extends Component {
       body: '',
       author: '',
       imageUrl: '',
+      rating: 0,
       comments: []
+
     }
   }
   addPost(e) {

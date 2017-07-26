@@ -8,7 +8,7 @@ class AddComment extends Component {
     this.state={
       comments:[{
         name: '',
-        date: new Date()
+        date: Date.now()
       }]
 
     }
@@ -25,10 +25,10 @@ class AddComment extends Component {
   handleChange(e){
     this.setState({
       comments: {
-      [e.target.id]: e.target.value
+      [e.target.id]: e.target.value,
+      date: Date.now()
     }
     })
-    console.log(this.state.comments);
   }
   render() {
     return (

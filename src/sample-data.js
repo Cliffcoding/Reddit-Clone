@@ -3,14 +3,15 @@ const SamplePosts = [{
   body: 'I want to write something very descriptive, but I am just not sure',
   author: 'J-Doggy',
   imageUrl: 'https://static.pexels.com/photos/494917/pexels-photo-494917.jpeg',
-  rating: 0,
+  rating: 8,
+  created_at: Date.now(),
   comments: [{
     name: 'First comment!',
-    date: new Date()
+    date: Date.now()
     },
     {
     name: 'I wanted to comment first....',
-    date: new Date()
+    date: Date.now()
     }]
 },
 {
@@ -18,14 +19,15 @@ const SamplePosts = [{
   body: 'I yike tootles',
   author: 'this guy',
   imageUrl: 'https://static.pexels.com/photos/494917/pexels-photo-494917.jpeg',
-  rating: 0,
+  rating: 8,
+  created_at: Date.now(),
   comments: [{
     name: 'Bacon',
-    date: new Date()
+    date: Date.now()
     },
     {
     name: 'Eggs',
-    date: new Date()
+    date: Date.now()
     }]
 },
 {
@@ -33,14 +35,15 @@ const SamplePosts = [{
   body: 'I want to write something very descriptive, but I am just not sure',
   author: 'The dog man',
   imageUrl: 'https://static.pexels.com/photos/494917/pexels-photo-494917.jpeg',
-  rating: 0,
+  rating: 7,
+  created_at: Date.now(),
   comments: [{
   name: 'comments are cool!',
-  date: new Date()
+  date: Date.now()
   },
   {
   name: 'yeah they are',
-  date: new Date()
+  date: Date.now()
   }]
 }];
 export default SamplePosts;
