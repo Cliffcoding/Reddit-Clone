@@ -40,7 +40,7 @@ class Post extends Component {
                 </p>
                     <i className="glyphicon glyphicon-comment"></i>
                     <a onClick={ this.toggleComments }>
-                      {this.props.post.comments.length} Comments   
+                      {this.props.post.comments.length} Comments
                     </a>
                     <small>
                       <Moment fromNow>

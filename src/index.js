@@ -32,6 +32,7 @@ class Index extends Component {
       posts: SamplePosts
     }
   }
+  
   toggleNewPost() {
     this.state.newPostActive === true ? this.setState({newPostActive: false}) : this.setState({newPostActive: true})
   }
